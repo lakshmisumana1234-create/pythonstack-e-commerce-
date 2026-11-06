@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card {
+            width: 300px;
+            height: 300px;
+            border: 2px solid gray;
+            text-align: center;
+            margin: 3px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
+        }
+
+        #container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .input {
+            padding: 10px;
+            width: 450px;
+            border-radius: 20px;
+            border: 2px solid gray;
+        }
+    </style>
+</head>
+
+<body>
+    <input class="input" type="text" placeholder="Search" id="input-search">
+    <button onclick="showData()">SEARCH</button>
+    <div>
+        <input type="checkbox" name="price" id="100+" onclick="handlePrice(100)">100+
+        <input type="checkbox" name="price" id="100-" onclick="handlePrice(99)">100-
+    </div>
+    <div id="container">
+
+    </div>
+    <script>
+
+        let details = [
+            {
+                "id": 1,
+                "title": "Wireless Headphones",
+                "price": 1499,
+                "description": "Noise-cancelling headphones with Bluetooth connectivity and high-quality sound.",
+                "category": "electronics",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxhsVtzPMjORRos_9tgk94akG0q6g4dRD8h97NhZgrxg&s=100",
+                "rating": {
+                    "rate": 3.9,
+                    "count": 120
+                }
+            },
+            {
+                "id": 2,
+                "title": "Smart Watch",
+                "price": 2499,
+                "description": "Fitness tracking, heart-rate monitoring and notifications.",
+                "category": "electronics",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT98w7FbqUAUtw8Qedk6OflVv72Em3Rsxyddmiy0hZQaA&s=100",
+                "rating": {
+                    "rate": 4.1,
+                    "count": 259
+                }
+            },
+            {
+                "id": 3,
+                "title": "Laptop",
+                "price": 45999,
+                "description": "Lightweight laptop suitable for studying, office work and entertainment.",
+                "category": "electronics",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbRX4P5ykLNYSaM2Hmn2sno_f3jEUzEZq5LAbvMXR1kQ&s=100",
+                "rating": {
+                    "rate": 4.7,
+                    "count": 500
+                }
+            },
+            {
+                "id": 4,
+                "title": "Men's Oversized T-Shirt",
+                "price": 599,
+                "description": "Comfortable oversized cotton T-shirt for casual wear.",
+                "category": "men's clothing",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVZqdXxWo0Nmkrn1Vi4UNL5-OAWfpjhi4YYNCcZsJFTQ&s=100",
+                "rating": {
+                    "rate": 2.1,
+                    "count": 430
+                }
+            },
+            {
+                "id": 5,
+                "title": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+                "price": 695,
+                "description": "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+                "category": "jewelery",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTvGYNGRKaJfV_JGpxVcCifo7YGwj8-7Xl39POZZb21w&s=100",
+                "rating": {
+                    "rate": 4.6,
+                    "count": 400
+                }
+            },
+            {
+                "id": 6,
+                "title": "Solid Gold Petite Micropave ",
+                "price": 199,
+                "description": "Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.",
+                "category": "jewelery",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9KuRtMKx8GA7sOMOPV-7g8YWai7wkfAI3jYsxXLzTmg&s=100",
+                "rating": {
+                    "rate": 3.9,
+                    "count": 70
+                }
+            },
+            {
+                "id": 7,
+                "title": "White Gold Plated Princess",
+                "price": 499,
+                "description": "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day...",
+                "category": "jewelery",
+                "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzPIq-cse1SOKYBqwTcW1sw6PcvQwSAK7dDi7tP2hE7Q&s=100",
+                "rating": {
+                    "rate": 3,
+                    "count": 400
+                }
+            },
+            {
+                "id": 8,
+                "title": "Pierced Owl Rose Gold Plated Stainless Steel Double",
+                "price": 199,
+                "description": "Rose Gold Plated Double Flared Tunnel Plug Earrings. Made of 316L Stainless Steel",
+                "category": "jewelery",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX5FQhrel9VnUZfkzC0cy12zRvKxyWtcJ6C3Kt06W3Tg&s=100",
+                "rating": {
+                    "rate": 1.9,
+                    "count": 100
+                }
+            },
+            {
+                "id": 9,
+                "title": "Women's Summer Dress ",
+                "price": 499,
+                "description": "Lightweight floral dress suitable for everyday and summer outings.",
+                "category": "women's clothing",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdkN-yut_K3i0IMtdEj1wONH-wi_8xop3-he-0SDMWsA&s=100",
+                "rating": {
+                    "rate": 3.3,
+                    "count": 203
+                }
+            },
+            {
+                "id": 10,
+                "title": "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s",
+                "price": 499,
+                "description": "Easy upgrade for faster boot up, shutdown, application load and response (As compared to 5400 RPM SATA 2.5” hard drive; Based on published specifications and internal benchmarking tests using PCMark vantage scores) Boosts burst write performance, making it ideal for typical PC workloads The perfect balance of performance and reliability Read/write speeds of up to 535MB/s/450MB/s (Based on internal testing; Performance may vary depending upon drive capacity, host device, OS and application.)",
+                "category": "electronics",
+                "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT_g2jSwMi_Txvtm5srNl1dQRCvRQwCOTVzKTSuLCBdQw&s=100",
+                "rating": {
+                    "rate": 2.9,
+                    "count": 470
+                }
+            },
+            {
+                "id": 11,
+                "title": "Women's Hoodie",
+                "price": 1099,
+                "description": "Soft fleece hoodie with a relaxed fit for cooler weather.",
+                "category": "women's clothing",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_UUz7xR0EQQ9lyBQDrJ-MG28ZsCA3v-9RLJLEuJH5wQ&s=100",
+                "rating": {
+                    "rate": 4.8,
+                    "count": 319
+                }
+            },
+            {
+                "id": 12,
+                "title": "Women's Cotton Kurti",
+                "price": 799,
+                "description": "Traditional printed cotton kurti for everyday ethnic wear.",
+                "category": "women's clothing",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnWw7dIlNbY2KyFyfnZtUfJiY0rA_VUUWEu3Ag3a2h1w&s=10",
+                "rating": {
+                    "rate": 4.8,
+                    "count": 400
+                }
+            },
+            {
+                "id": 13,
+                "title": "Leather Wallet",
+                "price": 599,
+                "description": "Compact wallet with multiple card slots and cash compartments.",
+                "category": "men's accessories",
+                "image": "https://m.media-amazon.com/images/I/81IkoejH5rL._AC_UY1100_.jpg",
+                "rating": {
+                    "rate": 2.9,
+                    "count": 250
+                }
+            },
+            {
+                "id": 14,
+                "title": "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED ",
+                "price": 120999,
+                "description": "49 INCH SUPER ULTRAWIDE 32:9 CURVED GAMING MONITOR with dual 27 inch screen side by side QUANTUM DOT (QLED) TECHNOLOGY, HDR support and factory calibration provides stunningly realistic and accurate color and contrast 144HZ HIGH REFRESH RATE and 1ms ultra fast response time work to eliminate motion blur, ghosting, and reduce input lag",
+                "category": "electronics",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYzz6XyaMo7iS61M1bUEABNA24X8gty_4a8SMuE4LwMQ&s=100",
+                "rating": {
+                    "rate": 2.2,
+                    "count": 140
+                }
+            },
+            {
+                "id": 15,
+                "title": "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
+                "price": 5699,
+                "description": "Note:The Jackets is US standard size, Please choose size as your usual wear Material: 100% Polyester; Detachable Liner Fabric: Warm Fleece. Detachable Functional Liner: Skin Friendly, Lightweigt and Warm.Stand Collar Liner jacket, keep you warm in cold weather. Zippered Pockets: 2 Zippered Hand Pockets, 2 Zippered Pockets on Chest (enough to keep cards or keys)and 1 Hidden Pocket Inside.Zippered Hand Pockets and Hidden Pocket keep your things secure. Humanized Design: Adjustable and Detachable Hood and Adjustable cuff to prevent the wind and water,for a comfortable fit. 3 in 1 Detachable Design provide more convenience, you can separate the coat and inner as needed, or wear it together. It is suitable for different season and help you adapt to different climates",
+                "category": "women's clothing",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLvsG3-Vyc03kcZjDSmtASjKjJTKkJJo76MLKRJLBysw&s=100",
+                "rating": {
+                    "rate": 2.6,
+                    "count": 235
+                }
+            },
+            {
+                "id": 16,
+                "title": "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
+                "price": 7999,
+                "description": "100% POLYURETHANE(shell) 100% POLYESTER(lining) 75% POLYESTER 25% COTTON (SWEATER), Faux leather material for style and comfort / 2 pockets of front, 2-For-One Hooded denim style faux leather jacket, Button detail on waist / Detail stitching at sides, HAND WASH ONLY / DO NOT BLEACH / LINE DRY / DO NOT IRON",
+                "category": "women's clothing",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk5crEA1tRfWg7wWwUJiXYLtpoi_S2V48rf15wu9aR_A&s=100",
+                "rating": {
+                    "rate": 2.9,
+                    "count": 340
+                }
+            }
+                       
+       
+           
+        ]
+        function handlePrice(x) {
+            let newpriceData = []
+            let lessPrice = []
+            for (i = 0; i < details.length; i++) {
+                if (details[i].price > x) {
+                    newpriceData.push(details[i])
+                }
+                else {
+                    lessPrice.push(details[i])
+                }
+            }
+            document.getElementById("container").innerHTML = ""
+            for (i = 0; i < lessPrice.length; i++) {
+                document.getElementById("container").innerHTML += `<div class="card">
+            <img src="${lessPrice[i].image}"
+                alt="">
+            <p>PRICE: ${lessPrice[i].price}/-</p>
+            <p>DESC: ${lessPrice[i].title}</p>
+            <p>Brand : ${lessPrice[i].category}</p>
+            <button>BUY NOW</button>
+        </div>`
+            }
+        }
+
+        function showData() {
+            searchQuerry = document.getElementById("input-search").value;
+            newData = []
+            for (i = 0; i < details.length; i++) {
+                if (details[i].category == searchQuerry) {
+                    newData.push(details[i])
+                }
+            }
+            document.getElementById("container").innerHTML = ""
+            for (i = 0; i < newData.length; i++) {
+                document.getElementById("container").innerHTML += `<div class="card">
+            <img src="${newData[i].image}"
+                alt="">
+            <p>PRICE: ${newData[i].price}/-</p>
+            <p>DESC: ${newData[i].title}</p>
+            <p>Brand : ${newData[i].category}</p>
+            <button>BUY NOW</button>
+        </div>`
+            }
+        }
+
+        for (i = 0; i < details.length; i++) {
+            document.getElementById("container").innerHTML += `<div class="card">
+            <img src="${details[i].image}"
+                alt="">
+            <p>PRICE: ${details[i].price}/-</p>
+            <p>DESC: ${details[i].title}</p>
+            <p>Brand : ${details[i].category}</p>
+            <button>BUY NOW</button>
+        </div>`
+        }
+    </script>
+</body>
+</html>
